@@ -67,3 +67,12 @@ pyplot.plot(yhat_inverse, label='predict')
 pyplot.plot(testY_inverse, label='actual', alpha=0.5)
 pyplot.legend()
 pyplot.show()
+predictDates = data.tail(len(testX)).index
+testY_reshape = testY_inverse.reshape(len(testY_inverse))
+yhat_reshape = yhat_inverse.reshape(len(yhat_inverse))
+#Plot predicted and actual line graph with X=dates, Y=USD
+import plotly.offline as py
+import plotly.graph_objs as go
+actual_chart = go.Scatter(x=predictDates, y=testY_reshape, name= 'Actual Price')
+predict_chart = go.Scatter(x=predictDates, y=yhat_reshape, name= 'Predict Price')
+py.iplot([predict_chart, actual_chart])
